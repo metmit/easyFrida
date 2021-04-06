@@ -1,0 +1,6 @@
+su
+cd /data/local/tmp
+ls
+./fs &
+exit
+exit
