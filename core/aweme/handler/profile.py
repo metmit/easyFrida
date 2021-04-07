@@ -10,6 +10,6 @@ class Profile(BaseTask):
             print("Params Error!")
             return False
 
-        needData = False
+        needData = True
         response = self.rpc.profile(uid, sec_uid, needData)
         return response

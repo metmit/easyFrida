@@ -188,15 +188,16 @@ helper.reflect = {
      * @returns {{}}
      */
     getFields: function (instance, needFields) {
+        var _this = this
         var result = {}
         if (!instance) return result;
-        var reflect = this.getInstance(instance)
+        var reflect = _this.getInstance(instance)
         var fields = reflect.getDeclaredFields();
         if (!needFields) needFields = []
         fields.forEach(function (field) {
             // field.setAccessible(true); // 注释后速度反而提升了
             if (needFields.length <= 0 || needFields.indexOf(field.getName() + '') >= 0) {
-                result[field.getName() + ''] = this.parseField(field.getType(), field.get(instance))
+                result[field.getName() + ''] = _this.parseField(field.getType(), field.get(instance))
             }
         })
         return result
@@ -209,14 +210,15 @@ helper.reflect = {
      * @returns {{}}
      */
     getFastFields: function (instance, fields) {
+        var _this = this
         var result = {};
         if (!instance) return result;
         if (!fields || fields.length <= 0) {
-            return this.getFields(instance, fields)
+            return _this.getFields(instance, fields)
         }
-        var reflect = this.getInstance(instance)
+        var reflect = _this.getInstance(instance)
         fields.forEach(function (field) {
-            result[field] = this.getField(instance, field, reflect)
+            result[field] = _this.getField(instance, field, reflect)
         })
         return result;
     },

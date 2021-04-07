@@ -69,7 +69,7 @@ class Aweme(object):
                     continue
             break
 
-        if not session and self.forceReboot:  # TODO 如果有appium进程，不自动启动APP
+        if not session:
             # 启动调试进程
             pid = device.spawn('com.ss.android.ugc.aweme')
             session = device.attach(pid)
@@ -135,15 +135,12 @@ class Aweme(object):
     @staticmethod
     def _load_js_code(filenames):
 
-        if 'FRIDA_ROOT_PATH' not in os.environ or len(os.environ["FRIDA_ROOT_PATH"]) <= 0:
-            os.environ["FRIDA_ROOT_PATH"] = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
-        root_path = os.environ["FRIDA_ROOT_PATH"]
+        root_path = utils.get_root_path()
 
         common_code = ''
 
         # 加载帮助文件
-        common_code += open(os.path.join(root_path, 'utils/helper.js'), 'r', encoding='utf8').read()
+        common_code += open(os.path.join(root_path, 'core/common/script', 'helper.js'), 'r', encoding='utf8').read()
         common_code += '\n\n\n'
 
         script_path = 'core/aweme/script'
@@ -154,7 +151,8 @@ class Aweme(object):
             common_code += '\n\n\n'
 
         # 加载rpc文件
-        common_code += open(os.path.join(root_path, script_path, 'rpc.js'), 'r', encoding='utf8').read()
+        common_code += open(os.path.join(root_path, 'core/common/script', 'rpc.js'), 'r', encoding='utf8').read()
+
         return common_code
 
 

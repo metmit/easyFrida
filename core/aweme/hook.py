@@ -22,8 +22,8 @@ class Hook(Aweme):
 
 
 if __name__ == '__main__':
-    test_debut = True
-    if test_debut:
+    test_debug = True
+    if test_debug:
         Hook().debug({})
     else:
         Hook().run()

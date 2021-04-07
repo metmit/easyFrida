@@ -35,8 +35,10 @@ class Gorgon(BaseTask):
             return False
 
         if sign_type == 'leviathan':
-            return self.__leviathan(url, headerMap)
-        return self.__tt(url, headerMap)
+            result = self.__leviathan(url, headerMap)
+        else:
+            result = self.__tt(url, headerMap)
+        return result
 
     def __tt(self, url, headerMap):
         return self.rpc.gorgontt(url, json.dumps(headerMap))
